@@ -6,13 +6,19 @@ import sys
 m = {}
 # Computes if something is prime
 def is_prime(x):
-    global m
+    if x == 2 or x == 3: return True
+    if x < 2 or x % 2 == 0: return False
+    if x < 9: return True
+    if x % 3 == 0: return False
     if x in m:
         return m[x]
-    for i in xrange(2, int(math.sqrt(x)) + 1):
-        if x % i == 0:
+    f = 5
+    r = math.sqrt(x)
+    while f <= r:
+        if x % f == 0 or x % (f + 2) == 0:
             m[x] = False
             return False
+        f += 6
     m[x] = True
     return True
 
@@ -44,18 +50,4 @@ else:
 # Ah-ha this is just triangular numbers
 # Oh wait, this doesn't work for 36: [2 * 3 * 6] because we need to combine a 2 and a 3
 
-total = 0
-last = -1
-for factor, count in x.items():
-    if count == 1:
-        total += 1
-        continue
-
-    c, d, i = 1, 1, 1
-    while d < count:
-        d += i
-        c += 1
-        i += 1
-    total += max(1, i - 2)
-
-print total
+print sum(x.values())
