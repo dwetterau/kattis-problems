@@ -42,6 +42,9 @@ for c in xrange(cases):
                 else:
                     winner = "one" if not player % 2 else "two"
                     # This player sunk all of the other player's ships, but they get one more turn
+                    if player == 1:
+                        # JK, if player 2 sunk all, they win immediately
+                        playing = False
                     player = (player + 1) % 2
         else:
             if winner is not None:
